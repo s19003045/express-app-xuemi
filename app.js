@@ -1,24 +1,28 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const exphbs = require("express-handlebars");
+
+// 設定樣版引擎
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 
 // 設定 public folder
 app.use("/static", express.static("public"));
 
 // 根路由
 app.get("/", function (req, res) {
-    res.send("hello world");
+    res.render("home");
+    // res.send("hello world");
 });
 
 // 回傳文字訊息 or html tag
 app.get("/articles", (req, res) => {
-    res.send(
-        `<p>Do sint elit consequat commodo ullamco fugiat minim. Et commodo deserunt mollit ea reprehenderit laborum aliqua nulla veniam duis commodo enim occaecat. Officia eu aute mollit cupidatat.</p>
+    res.render("articles");
+});
 
-        <p>Dolore anim labore mollit nisi dolore. Eiusmod labore enim aute magna ex nostrud anim id nostrud incididunt dolore ea. Minim amet eu Lorem ipsum cillum veniam voluptate labore duis deserunt occaecat aute aute. Mollit id minim do dolore consequat ex. Officia non reprehenderit veniam aliqua exercitation. Elit sit anim occaecat minim adipisicing adipisicing. Consequat non incididunt proident eu occaecat fugiat Lorem ea aute.</p>
-
-        <p>Quis quis amet dolor est ipsum pariatur reprehenderit officia quis id. Officia laboris nulla fugiat nostrud nisi sunt anim sit. Proident anim Lorem elit quis do do aute magna anim. Aute occaecat velit cupidatat non eu in labore elit Lorem qui consequat irure tempor.</p>`
-    );
+app.get("/about", (req, res) => {
+    res.render("about");
 });
 
 // 取得 txt
