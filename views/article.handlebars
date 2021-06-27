@@ -2,14 +2,17 @@
     {{#if this.publish}}
         <section class="article">
 
-            {{!-- <h3>← {{link "Go back" ../backUrl}}</h3> --}}
-            <h3><a href="{{../backUrl}}">← Go back</a></h3>
+            {{!-- 使用 cutsom helper (自定義)--}}
+            <h3>← {{link "Go back" ../backUrl}}</h3>
+
+            {{!-- <h3><a href="{{../backUrl}}">← Go back</a></h3> --}}
             <br />
 
             {{#with this}}
                 <h2 class="article-title">
-                    {{!-- {{key}}{{UpperCase title}} --}}
-                    {{key}}{{title}}
+                    {{!-- 使用 cutsom helper (自定義) --}}
+                    {{key}}{{UpperCase title}}
+                    {{!-- {{key}}{{title}} --}}
                 </h2>
                 <h3 class="article-subTitle">
                     {{subTitle}}

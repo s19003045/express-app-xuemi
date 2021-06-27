@@ -1,12 +1,12 @@
 {{#each articles}}
     {{#if this.publish}}
         <section class="article">
-            {{!-- <h3>{{link "Go to page" this.url}}</h3> --}}
-            <h3><a href={{this.url}}>Go to page</a></h3>
+            <h3>{{link "Go to page" this.url}}</h3>
+            {{!-- <h3><a href={{this.url}}>Go to page</a></h3> --}}
             <br />
             {{#with this}}
                 <h2 class="article-title">
-                    {{!-- {{key}}{{UpperCase title}} --}}
+                    {{key}}{{UpperCase title}}
                     {{key}}{{title}}
                 </h2>
                 <h3 class="article-subTitle">

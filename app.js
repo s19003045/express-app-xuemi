@@ -1,12 +1,19 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const exphbs = require("express-handlebars");
+// const exphbs = require("express-handlebars");
+
+// 載入 exphbs instance
+const { hbs } = require("./exphbsSetting");
+
 //
 const articles = require("./data/articles");
 
 // 設定樣版引擎
-app.engine("handlebars", exphbs());
+// 1. 使用 exphbs
+// app.engine("handlebars", exphbs());
+// 2. 使用 exphbs instance
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // 設定 public folder
