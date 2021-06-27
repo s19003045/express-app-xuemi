@@ -37,6 +37,11 @@ app.get("/about", (req, res) => {
     res.render("about");
 });
 
+// login page
+app.get("/login", function (req, res) {
+    res.render("login");
+});
+
 // 取得 txt
 app.get("/getTxt", (req, res) => {
     // res.sendFile
