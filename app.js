@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const exphbs = require("express-handlebars");
+//
+const articles = require("./data/articles");
 
 // 設定樣版引擎
 app.engine("handlebars", exphbs());
@@ -16,9 +18,19 @@ app.get("/", function (req, res) {
     // res.send("hello world");
 });
 
-// 回傳文字訊息 or html tag
+// 單篇文章
+app.get("/articles/:id", (req, res) => {
+    const id = req.params.id;
+    res.render("article", {
+        articles: [articles[id]],
+        backUrl: "/articles",
+    });
+    // res.render("articles", context);
+});
+
+// 文章列表
 app.get("/articles", (req, res) => {
-    res.render("articles");
+    res.render("articles", { articles: articles });
 });
 
 app.get("/about", (req, res) => {
