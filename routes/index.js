@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const articles = require("../data/articles");
 
 // 根路由
 router.get("/", function (req, res) {
