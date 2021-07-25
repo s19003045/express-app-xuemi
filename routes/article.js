@@ -16,14 +16,9 @@ router.get("/", (req, res) => {
 
         // 使用樣板
         res.render("articles", {
-            articles: articles,
-            js: ["article.js"]
+            articles: articles
         });
     });
-    // res.render("articles", {
-    //     articles: articles,
-    //     js: ["article.js"]
-    // });
 });
 
 // 進入新增文章頁面, 此路由必須在 router.get("/:id") 之前
@@ -34,10 +29,10 @@ router.get("/new", (req, res) => {
             subTitle: "",
             content: ""
         },
-        method: "post",
-        url: "/articles",
-        backUrl: "/articles",
-        js: ["article.js"]
+        saveMethod: "post", // 新增文章的 method
+        saveUrl: "/api/articles", // 新增文章的 URI
+        cancelUrl: "/articles", // 取消編輯的轉址
+        js: ["article.js"] // 載入 js file
     });
 });
 
@@ -52,15 +47,13 @@ router.get("/:id", (req, res) => {
         // 使用樣板
         res.render("article", {
             articles: [articles[id]],
-            backUrl: "/articles",
-            js: ["article.js"]
+            backUrl: "/articles", // 回到上一頁
+            editUrl: `/articles/${id}/edit`, // 編輯文章頁面
+            deleteMethod: "delete", // 刪除文章的 method
+            deleteUrl: `/api/articles/${id}`, // 刪除文章的 URI
+            js: ["article.js"] // 載入 js file
         });
     });
-    // res.render("article", {
-    //     articles: [articles[id]],
-    //     backUrl: "/articles",
-    //     js: ["article.js"]
-    // });
 });
 
 // 進入編輯文章頁面
@@ -76,116 +69,12 @@ router.get("/:id/edit", (req, res) => {
         res.render("articleEdit", {
             id: id,
             article: articles[id],
-            method: "put",
-            url: `/articles/${id}`,
+            saveMethod: "put", // 修改文章的 method
+            saveUrl: `/api/articles/${id}`, // 修改文章的 URI
+            cancelUrl: `/articles/${id}`, // 取消編輯的轉址
             backUrl: "/articles",
-            js: ["article.js"]
+            js: ["article.js"] // 載入 js file
         });
-    });
-});
-
-// 新增文章
-router.post("/", (req, res) => {
-    const { title, subTitle, content } = req.body;
-
-    fs.readFile(articleFilePath, (err, data) => {
-        if (err) console.log(err);
-
-        const articles = JSON.parse(data.toString());
-
-        articles.push({
-            id: articles.length,
-            title: title || "",
-            subTitle: subTitle || "",
-            date: new Date().toString(),
-            content: content || "",
-            url: `/articles/${articles.length}`,
-            publish: true
-        });
-
-        const newData = JSON.stringify(articles, null, 4);
-        fs.writeFile(articleFilePath, newData, (err) => {
-            if (err) console.log(err);
-
-            // 回傳 json 訊息
-            res.send({
-                statusText: "ok",
-                message: "success post article",
-                redirect: `/articles/${articles.length - 1}`
-            });
-        });
-    });
-});
-
-// 修改文章
-router.put("/:id", (req, res) => {
-    const id = req.params.id;
-
-    const { title, subTitle, content } = req.body;
-
-    fs.readFile(articleFilePath, (err, data) => {
-        if (err) console.log(err);
-
-        const articles = JSON.parse(data.toString());
-
-        articles[id] = {
-            ...articles[id],
-            title: title || "",
-            subTitle: subTitle || "",
-            updatedDate: new Date().toString(), // 修改日期
-            content: content || ""
-        };
-
-        const newData = JSON.stringify(articles, null, 4);
-
-        fs.writeFile(articleFilePath, newData, (err) => {
-            if (err) console.log(err);
-
-            // 回傳 json 訊息
-            res.send({
-                statusText: "ok",
-                message: "success put article",
-                redirect: `/articles/${id}`
-            });
-        });
-    });
-});
-
-// 刪除文章
-router.delete("/:id", (req, res) => {
-    const index = req.params.id;
-
-    if (index > -1) {
-        fs.readFile(articleFilePath, (err, data) => {
-            if (err) console.log(err);
-
-            const articles = JSON.parse(data.toString());
-
-            articles[index] = {
-                ...articles[index],
-                publish: false,
-                delete: true,
-                deleteDate: new Date().toString()
-            };
-
-            const newData = JSON.stringify(articles, null, 4);
-
-            fs.writeFile(articleFilePath, newData, (err) => {
-                if (err) console.log(err);
-
-                // 回傳 json 訊息
-                return res.send({
-                    statusText: "ok",
-                    message: "success delete article",
-                    redirect: `/articles`
-                });
-            });
-        });
-    }
-    return res.send({
-        statusText: "fail",
-        message: "failed to delete article",
-        redirect: `/articles`
     });
 });
 

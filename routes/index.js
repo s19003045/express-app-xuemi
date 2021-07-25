@@ -33,6 +33,9 @@ router.use("/file", require("./file"));
 // 使用 auth router
 router.use("/auth", require("./auth"));
 
+// api
+router.use("/api", require("./api"));
+
 router.get("/*", (req, res) => {
     res.send("Not found");
 });

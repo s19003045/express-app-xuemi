@@ -15,13 +15,11 @@
                 <br />
 
                 <div class="btn-group">
-                    <button class="btn btn-submit" data-article-id="{{id}}" data-url="{{../url}}" data-method="{{../method}}">Save</button>
+                    <button class="btn btn-submit" data-article-id="{{id}}" data-url="{{../saveUrl}}" data-method="{{../saveMethod}}">Save</button>
 
-                    <a href="/articles">
+                    <a href="{{../cancelUrl}}">
                         <button
                             class="btn btn-cancel"
-                            data-method="delete"
-                            data-url="/articles/{{id}}"
                         >
                             Cancel
                         </button>

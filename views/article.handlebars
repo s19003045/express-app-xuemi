@@ -4,24 +4,23 @@
 
             {{!-- 使用 cutsom helper (自定義)--}}
             <h3>← {{link "Go back" ../backUrl}}</h3>
-
             {{!-- <h3><a href="{{../backUrl}}">← Go back</a></h3> --}}
             <br />
 
-            <div class="btn-group">
-                <a href="/articles/{{id}}/edit">
+            {{!-- <div class="btn-group">
+                <a href={{../editUrl}}>
                     <button class="btn btn-edit">
                         Edit
                     </button>
                 </a>
                 <button
                     class="btn btn-delete"
-                    data-method="delete"
-                    data-url="/articles/{{id}}"
+                    data-method={{../deleteMethod}}
+                    data-url={{../deleteUrl}}
                 >
                     Delete
                 </button>
-            </div>
+            </div> --}}
 
             {{#with this}}
                 <h2 class="article-title">

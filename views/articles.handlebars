@@ -1,12 +1,13 @@
-<a href="/articles/new">
+{{! <a href="/articles/new">
     <button class="btn btn-create">
         Create
     </button>
-</a>
+</a> }}
 
 {{#each articles}}
     {{#if this.publish}}
         <section class="article">
+            {{! 使用 cutsom helper (自定義)}}
             <h3>{{link "Go to page" this.url}}</h3>
             {{!-- <h3><a href={{this.url}}>Go to page</a></h3> --}}
 

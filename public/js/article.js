@@ -3,7 +3,7 @@ const btnDel = document.querySelector("button.btn.btn-delete");
 
 const getInputValueById = (id) => {
     const ele = document.getElementById(id);
-    return ele.value;
+    return ele && ele.value;
 };
 
 if (btnSubmit) {
@@ -25,10 +25,10 @@ if (btnSubmit) {
             data: data
         }).then((res) => {
             if (res.data.statusText === "ok") {
-                if (res.data.redirect)
-                    window.location.assign(res.data.redirect);
+                // 轉址
+                window.location.assign(res.data.redirect || "/articles");
             } else {
-                window.location.assign("/articles");
+                alert(res.data.message || "there is something wrong.");
             }
         });
     });
@@ -38,18 +38,16 @@ if (btnDel) {
     btnDel.addEventListener("click", function (e) {
         const url = btnDel.dataset.url;
         const method = btnDel.dataset.method;
-        console.log(url);
-        console.log(method);
+
         axios({
             method: method,
             url: url
         }).then((res) => {
             if (res.data.statusText === "ok") {
-                if (res.data.redirect)
-                    // 轉址
-                    window.location.assign(res.data.redirect);
+                // 轉址
+                window.location.assign(res.data.redirect || "/articles");
             } else {
-                window.location.assign("/articles");
+                alert(res.data.message || "there is something wrong.");
             }
         });
     });
