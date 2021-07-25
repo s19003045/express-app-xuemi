@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const fs = require("fs");
+const bodyParser = require("body-parser");
 // const exphbs = require("express-handlebars");
 
 // 載入 exphbs instance
@@ -13,6 +14,10 @@ const { hbs } = require("./exphbsSetting");
 // 2. 使用 exphbs instance
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+
+// parse req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const logger = (req, res, next) => {
     // // originalUrl = baseUrl + url

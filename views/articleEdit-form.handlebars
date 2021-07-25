@@ -1,0 +1,28 @@
+<section class="article">
+    {{#with article}}
+        <div class="edit-article">
+            <form method="put" action="/articles/{{../id}}">
+
+                <label for="title" class="edit-article__item-label">Title</label><br>
+                <input type="text" id="title" name="title" class="edit-article__item-input" placeholder="" value="{{title}}">
+                <br />
+
+                <label for="Subtitle" class="edit-article__item-label">Subtitle</label><br>
+                <input type="text" id="Subtitle" name="Subtitle" class="edit-article__item-input" placeholder="" value="{{subTitle}}">
+                <br />
+
+                <label for="date" class="edit-article__item-label">date</label><br>
+                <input type="text" id="date" name="date" class="edit-article__item-input" placeholder="" value="{{date}}">
+                <br />
+
+                <label for="content" class="edit-article__item-label">content</label><br>
+                <textarea id="content" name="content" class="edit-article__item-textarea" placeholder="" rows="20" cols="200">
+                    {{content}}
+                </textarea>
+                <br />
+
+                <input type="submit" value="Submit" class="btn" value="SUBMIT">
+            </form>
+        </div>
+    {{/with}}
+</section>

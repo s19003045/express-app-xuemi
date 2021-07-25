@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="/static/style/mainHbs.css" />
+        {{#each css}}
+            <link rel="stylesheet" href="/css/{{this}}">
+        {{/each}}
     </head>
     <body>
       {{> header/navbar}}
@@ -14,5 +17,14 @@
             </div>
         </main>
         {{> footer/footer}}
+
+
+        {{!-- axios --}}
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        {{#each js}}
+            <script src="/static/js/{{this}}"></script>
+        {{/each}}
+
     </body>
 </html>

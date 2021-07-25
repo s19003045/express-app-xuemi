@@ -8,17 +8,32 @@
             {{!-- <h3><a href="{{../backUrl}}">← Go back</a></h3> --}}
             <br />
 
+            <div class="btn-group">
+                <a href="/articles/{{id}}/edit">
+                    <button class="btn btn-edit">
+                        Edit
+                    </button>
+                </a>
+                <button
+                    class="btn btn-delete"
+                    data-method="delete"
+                    data-url="/articles/{{id}}"
+                >
+                    Delete
+                </button>
+            </div>
+
             {{#with this}}
                 <h2 class="article-title">
                     {{!-- 使用 cutsom helper (自定義) --}}
-                    {{key}}{{UpperCase title}}
+                    {{id}}_{{UpperCase title}}
                     {{!-- {{key}}{{title}} --}}
                 </h2>
                 <h3 class="article-subTitle">
                     {{subTitle}}
                 </h3>
                 <h4 class="article-date">
-                    {{date}}
+                    {{createdDate}}
                 </h4>
                 <p class="article-ontent">
                     {{content}}

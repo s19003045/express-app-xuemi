@@ -17,11 +17,10 @@ const authenticator = (req, res, next) => {
 // 根路由
 router.get("/", function (req, res) {
     res.render("home");
-    // res.send("hello world");
 });
 
 router.get("/about", (req, res) => {
-    throw new Error("something wrong");
+    // throw new Error("something wrong");
     res.render("about");
 });
 

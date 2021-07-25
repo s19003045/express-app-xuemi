@@ -1,0 +1,33 @@
+<section class="article">
+    {{#with article}}
+        <div class="edit-article">
+            <div>
+                <label for="title" class="edit-article__item-label">Title</label><br>
+                <input type="text" id="title" name="title" class="edit-article__item-input" placeholder="" value="{{title}}">
+                <br />
+
+                <label for="subtitle" class="edit-article__item-label">Subtitle</label><br>
+                <input type="text" id="subtitle" name="subtitle" class="edit-article__item-input" placeholder="" value="{{subTitle}}">
+                <br />
+
+                <label for="content" class="edit-article__item-label">Content</label><br>
+                <textarea id="content" name="content" class="edit-article__item-textarea" placeholder="" rows="20" cols="200">{{content}}</textarea>
+                <br />
+
+                <div class="btn-group">
+                    <button class="btn btn-submit" data-article-id="{{id}}" data-url="{{../url}}" data-method="{{../method}}">Save</button>
+
+                    <a href="/articles">
+                        <button
+                            class="btn btn-cancel"
+                            data-method="delete"
+                            data-url="/articles/{{id}}"
+                        >
+                            Cancel
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {{/with}}
+</section>
